@@ -1,8 +1,14 @@
-import React from 'react';
-import { Box, Link } from '@mui/material';
-import styles from './style';
+import React from "react";
+import { Box, Link } from "@mui/material";
+import styles from "./style";
 
-const sections = ['skills', 'achievements', 'internships', 'projects', 'contact'];
+const sections = [
+  "skills",
+  "achievements",
+  "internships",
+  "projects",
+  "contact",
+];
 
 export default function Navbar() {
   return (
@@ -10,11 +16,7 @@ export default function Navbar() {
       <Box sx={styles.navTitle}>Antony's Portfolio</Box>
       <Box sx={styles.navLinks}>
         {sections.map((section, i) => (
-          <Link
-            key={i}
-            href={`#${section}`}
-            sx={styles.navLink}
-          >
+          <Link key={i} href={`#${section}`} sx={styles.navLink}>
             {section.charAt(0).toUpperCase() + section.slice(1)}
           </Link>
         ))}
