@@ -6,11 +6,7 @@ import {
   Grid,
   Paper,
   Avatar,
-  Chip,
   Link,
-  Card,
-  CardMedia,
-  CardContent,
 } from "@mui/material";
 import {
   GitHub,
@@ -25,15 +21,14 @@ import {
   Translate,
   Psychology,
   Star,
-  HistoryToggleOff,
-  Business,
 } from "@mui/icons-material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 import styles from "./style";
-import profilePic from "./profile.jpg";
+import profilePic from "./profile.png";
 import NavBar from "./Navbar";
 import ContactForm from "./ContactForm";
+import Resume from "./resume.pdf";
 
 // Replace these with your actual Unsplash image URLs for best results
 // Search "computer science student", "mern stack", "programming grid", "hackathon prize", "internship office", "college campus", "certificate", "patent", "water safety", "weather app", "password generator", "qr code", "traffic ai", "student record", etc.
@@ -62,35 +57,35 @@ const UNSLASH_INTERESTS_BG =
 const UNSLASH_SOFT_SKILLS_BG =
   "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
 
-// --- YOUR DATA ---
-const avatarHovered = false; // state for avatar hover effect, but not used in this static example
-
 const skills = [
+  // Full Stack Core
   "React.js",
-  "React Native",
   "Node.js",
   "Express.js",
-  "JavaScript",
-  "HTML",
-  "CSS",
+
+  // Backend | Java
+  "Java",
+  "Spring Boot",
+  "Hibernate",
+  "JDBC",
+  "Maven",
+
+  // Databases
   "MySQL",
+  "PostgreSQL",
   "MongoDB",
-  "Material-UI",
-  "Git",
+
+  // Other
+  "REST APIs",
   "Deluge",
   "Zoho Sigma",
-  "REST APIs",
-  "JWT",
-  "bcrypt",
-  "Java",
-  "Python",
-  "C",
-  "C++",
 ];
+
+
 const achievements = [
-  "AURA’24 Hackathon – 3rd Prize (Bannari Amman Institute of Technology)",
   "Zoho Corporation Extension Developer Internship",
   "Amizhth InfoTech React Developer Internship",
+  "AURA’24 Hackathon – 3rd Prize (Bannari Amman Institute of Technology)",
   "Patent Holder (QR Code Water Can System, filed 2024)",
 ];
 const internships = [
@@ -109,48 +104,32 @@ const internships = [
 ];
 const projects = [
   {
-    name: "Xerox Hub",
-    link: "https://antony-s-xerox-hub.vercel.app",
-    github: "https://github.com/Antony-Godwin24/Xerox-Shop-Entrepreneur",
-    details: "Entrepreneurial portal for digital printing services.",
-  },
-  {
-    name: "Traffic Violation Detection System – AI/ML",
-    github: "https://github.com/Antony-Godwin24/TrafficViolationSystem",
+    name: "Zoho CRM Duplicate Detector",
     details:
-      "Computer vision system detecting traffic rule violations with OpenCV, YOLO, MediaPipe, and CNNs. Alerts authorities via dashboard/API. Built with Python, Flask/Streamlit, NumPy, SQLite/Firebase.",
+      "Zoho CRM extension detecting duplicates (Leads, Contacts, Accounts) by email/phone. Integrated with Deluge, CRM APIs, Sigma widgets, and custom modules.",
   },
   {
     name: "Smart QR-Based Water Can Monitoring System",
     github:
       "https://github.com/Antony-Godwin24/Smart-QR-Based-Water-Can-Monitoring-System-for-Safe-Reuse-and-Sustainability-Full-Stack",
     details:
-      "Full-stack water can management with JWT auth, admin panel, REST APIs (Express.js, MySQL), user purchase history, and QR-based quality tracking.",
+      "Full-stack system with JWT auth, admin panel, Express.js + MySQL backend, QR-based tracking, and quality monitoring.",
+  },
+  {
+    name: "Traffic Violation Detection System – AI/ML",
+    github: "https://github.com/Antony-Godwin24/TrafficViolationSystem",
+    details:
+      "Computer vision system detecting traffic violations using OpenCV, YOLO, CNNs. Alerts authorities via dashboard/API.",
   },
   {
     name: "Students Record Management",
     github: "https://github.com/Antony-Godwin24/Students-Record-Management",
     details:
-      "Role-based student management system (React.js, Express.js, MySQL, JWT, bcrypt, REST APIs) with CRUD for admins and students.",
-  },
-  {
-    name: "Zoho CRM Duplicate Detector",
-    details:
-      "Zoho CRM extension detecting duplicates (Leads, Contacts, Accounts) by email/phone, logging in custom module, real-time alerts.",
-  },
-  {
-    name: "Password Generator",
-    github: "",
-    details:
-      "React.js app generating secure passwords with real-time strength feedback.",
-  },
-  {
-    name: "Real-Time Weather App",
-    github: "https://github.com/Antony-Godwin24/React-Weather-by-Location",
-    details:
-      "React.js app displaying weather using Geolocation and OpenWeatherMap APIs.",
+      "Role-based student portal (React.js, Express.js, MySQL, JWT, bcrypt). Admin–student CRUD operations with secure auth.",
   },
 ];
+
+
 const education = [
   {
     institute: "K. Ramakrishnan College of Engineering",
@@ -209,7 +188,7 @@ export default function App() {
         <NavBar />
 
         {/* Hero Section */}
-        <Box sx={styles.hero}>
+        <Box id="hero" sx={styles.hero}>
           <Box
             component="img"
             src={UNSLASH_HERO_BG} // YOUR UNSLASH HERO IMAGE URL
@@ -242,7 +221,12 @@ export default function App() {
               Antony Godwin S
             </Typography>
             <Typography variant="h5" sx={styles.heroSubtitle}>
-              MERN Full Stack Developer | Hackathon Finalist | Patent Holder
+              Computer Science student and full-stack developer with hands-on experience in 
+MERN, PERN, and Java Spring Boot development. Strong in 
+building production-ready applications, backend APIs, and database-heavy 
+systems. Interned at Zoho as an Extension Developer working with Deluge, 
+CRM APIs, and custom modules.
+
             </Typography>
             <Typography
               variant="body1"
@@ -258,7 +242,7 @@ export default function App() {
               Zoho and Amizhth, contributor to real-world projects with
               React.js, Node.js, MongoDB, MySQL, Java, and modern dev tools.
             </Typography>
-            <a href="/resume.pdf" download style={{ textDecoration: "none" }}>
+            <a href={Resume} download style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
                 color="secondary"
@@ -627,7 +611,7 @@ export default function App() {
             </Link>
           </Box>
           <Typography variant="subtitle2" color="text.secondary">
-            © 2025 Antony Godwin
+            © {new Date().getFullYear()} Antony Godwin S
           </Typography>
         </Box>
       </Box>

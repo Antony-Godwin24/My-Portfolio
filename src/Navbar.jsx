@@ -13,7 +13,10 @@ const sections = [
 export default function Navbar() {
   return (
     <Box sx={styles.navbar}>
-      <Box sx={styles.navTitle}>Antony's Portfolio</Box>
+      <Link href="#hero" sx={{ ...styles.navTitle, textDecoration: "none" }}>
+        Antony's Portfolio
+      </Link>
+
       <Box sx={styles.navLinks}>
         {sections.map((section, i) => (
           <Link key={i} href={`#${section}`} sx={styles.navLink}>
