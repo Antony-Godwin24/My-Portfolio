@@ -22,10 +22,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.png 
-.jpg
-.jpeg
-.gif
-.pdf
-.ico
-.svg
+*.png 
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+*.ico
+*.svg
