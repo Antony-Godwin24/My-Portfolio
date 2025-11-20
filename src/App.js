@@ -28,7 +28,7 @@ import styles from "./style";
 import profilePic from "./profile.png";
 import NavBar from "./Navbar";
 import ContactForm from "./ContactForm";
-import Resume from "./resume.pdf";
+import Resume from "./resumeNew.pdf";
 
 // Replace these with your actual Unsplash image URLs for best results
 // Search "computer science student", "mern stack", "programming grid", "hackathon prize", "internship office", "college campus", "certificate", "patent", "water safety", "weather app", "password generator", "qr code", "traffic ai", "student record", etc.
