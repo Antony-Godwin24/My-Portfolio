@@ -47,7 +47,7 @@ const experience = [
   },
   {
     title: "React Developer Intern",
-    company: "Amizhth InfoTech",
+    company: "Amizhth Techno Solutions",
     period: "Sep 2025 – Dec 2025",
     points: [
       "Built responsive frontend features with React.js and Material-UI.",
@@ -132,8 +132,7 @@ export default function App() {
             <Typography variant="h3" sx={styles.sectionTitle}>
                 About Me
             </Typography>
-            <Box sx={{ maxWidth: "900px", mx: "auto" }}>
-
+            <Box sx={{ maxWidth: "900px" }}>
                 <Typography sx={styles.aboutText}>
   Hello! I’m Antony Godwin S, a full-stack developer who enjoys building 
   reliable, scalable applications that solve real-world problems. 
@@ -167,7 +166,7 @@ export default function App() {
              <Typography variant="h3" sx={styles.sectionTitle}>
                 Where I've Worked
             </Typography>
-            <Box sx={{ maxWidth: "700px", margin: "0 auto" }}>
+            <Box sx={{ maxWidth: "700px", margin: "0 90px" }}>
                 {experience.map((job, idx) => (
                     <Box key={idx} sx={styles.expCard}>
                         <Typography sx={styles.expTitle}>

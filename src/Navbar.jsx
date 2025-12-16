@@ -28,6 +28,22 @@ export default function Navbar() {
     setMobileOpen(!mobileOpen);
   };
 
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+        const offset = 80; // Height of navbar
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    }
+    if (mobileOpen) setMobileOpen(false); // Close drawer if open
+  };
+
   const drawerContent = (
     <Box sx={{ 
         height: "100%", 
@@ -35,17 +51,17 @@ export default function Navbar() {
         color: "#ccd6f6",
         textAlign: "center",
         paddingTop: "50px"
-    }} onClick={handleDrawerToggle}>
+    }}>
       <List sx={{ width: '100%', paddingLeft: '20px' }}>
         {sections.map((section) => (
           <ListItem key={section} disablePadding sx={{ margin: "15px 0" }}>
             <Link 
               href={`#${section}`} 
+              onClick={(e) => scrollToSection(e, section)} // Use custom scroll
               underline="none"
-              onClick={handleDrawerToggle}
               sx={{ 
                   ...styles.navLink, 
-                  fontSize: "1.5rem", // Larger for touch targets
+                  fontSize: "1.5rem", 
                   display: "block",
                   textAlign: "left",
                   width: "100%"
@@ -83,14 +99,23 @@ export default function Navbar() {
         padding: scrolled ? "10px clamp(20px, 5vw, 40px)" : "20px clamp(20px, 5vw, 40px)",
       }}
     >
-      <Link href="#hero" sx={styles.navLogo}>
+      <Link 
+        href="#hero" 
+        onClick={(e) => scrollToSection(e, "hero")}
+        sx={styles.navLogo}
+      >
         AG.
       </Link>
 
       {/* Desktop Links */}
       <Box sx={styles.navLinks}>
         {sections.map((section, i) => (
-          <Link key={i} href={`#${section}`} sx={styles.navLink}>
+          <Link 
+            key={i} 
+            href={`#${section}`} 
+            onClick={(e) => scrollToSection(e, section)}
+            sx={styles.navLink}
+          >
             {section.charAt(0).toUpperCase() + section.slice(1)}
           </Link>
         ))}

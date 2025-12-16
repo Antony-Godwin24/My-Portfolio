@@ -57,19 +57,20 @@ const styles = {
     position: "fixed",
     top: 0,
     left: 0,
-    width: "100%",
-    maxWidth: "100vw",
+    right: 0, // Snap to right edge explicitly
+    width: "auto", // Allow left/right to define total width
     zIndex: 1200,
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: "15px 30px", // Increased base padding
+    padding: "15px 50px", // Generous padding to prevent clipping
+    boxSizing: "border-box", // Double-ensure box-model
     backgroundColor: "rgba(10, 25, 47, 0.85)", 
     backdropFilter: "blur(10px)",
     boxShadow: "0 10px 30px -10px rgba(2,12,27,0.7)",
     transition: "all 0.3s ease",
     "@media (max-width: 768px)": {
-       padding: "15px 25px", // Safe mobile padding
+       padding: "15px 25px", 
     }
   },
   navLogo: {
@@ -119,8 +120,8 @@ const styles = {
     display: "flex",
     alignItems: "center",
     padding: "0 40px", // Increased desktop padding
-    // maxWidth: "1200px",
-    // margin: "0 auto",
+    maxWidth: "1200px",
+    margin: "0 auto",
     width: "100%",
     "@media (max-width: 768px)": {
         padding: "0 30px", // Increased mobile padding to prevent cutoff
@@ -246,9 +247,9 @@ const styles = {
 
   // --- GENERAL SECTION STYLES ---
   section: {
-    padding: "80px clamp(20px, 5vw, 60px)",
-    // maxWidth: "1200px",
-    // margin: "0 auto",
+    padding: "80px 40px",
+    maxWidth: "1200px",
+    margin: "0 auto",
     width: "100%",
     "@media (max-width: 960px)": {
         padding: "80px 30px", // More padding for tablet
