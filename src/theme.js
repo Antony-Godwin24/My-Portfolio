@@ -1,20 +1,22 @@
-// theme.js
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
-    primary: { main: '#3f51b5' },
-    secondary: { main: '#ff4081' },
-    background: { default: '#f5f7fa', paper: '#ffffff' },
-    text: { primary: '#1e1e1e', secondary: '#555' },
+    primary: { main: '#64ffda' }, // Teal
+    secondary: { main: '#8892b0' }, // Slate
+    background: { default: '#0a192f', paper: '#112240' }, // Navy, Light Navy
+    text: { primary: '#e6f1ff', secondary: '#8892b0' },
   },
   typography: {
-    fontFamily: "'Poppins', sans-serif",
-    h2: { fontWeight: 700, fontSize: '2.5rem', lineHeight: 1.2 },
-    h4: { fontWeight: 600, fontSize: '1.75rem', margin: '0 0 1rem' },
-    h5: { fontWeight: 500, fontSize: '1.25rem' },
-    h6: { fontWeight: 500, fontSize: '1.1rem' },
-    subtitle1: { fontWeight: 500, fontSize: '0.9rem' },
+    fontFamily: "'Inter', 'Segoe UI', sans-serif",
+    h1: { fontFamily: "'Inter', sans-serif", fontWeight: 700 },
+    h2: { fontFamily: "'Inter', sans-serif", fontWeight: 700 },
+    h3: { fontFamily: "'Inter', sans-serif", fontWeight: 600 },
+    h4: { fontFamily: "'Fira Code', monospace", fontWeight: 500 },
+    h5: { fontFamily: "'Fira Code', monospace", fontWeight: 500 },
+    h6: { fontFamily: "'Fira Code', monospace", fontWeight: 500 },
+    body1: { fontFamily: "'Inter', sans-serif" },
+    button: { fontFamily: "'Fira Code', monospace" },
   },
 });
 export default theme;

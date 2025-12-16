@@ -3,24 +3,13 @@ import {
   Box,
   Typography,
   Button,
-  Grid,
-  Paper,
-  Avatar,
   Link,
+  Container,
 } from "@mui/material";
 import {
   GitHub,
   LinkedIn,
-  Download,
-  Code,
-  EmojiEvents,
-  School,
-  WorkspacePremium,
-  EmojiObjects,
-  Build,
-  Translate,
-  Psychology,
-  Star,
+  FolderOpen,
 } from "@mui/icons-material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
@@ -30,589 +19,261 @@ import NavBar from "./Navbar";
 import ContactForm from "./ContactForm";
 import Resume from "./resumeNew.pdf";
 
-// Replace these with your actual Unsplash image URLs for best results
-// Search "computer science student", "mern stack", "programming grid", "hackathon prize", "internship office", "college campus", "certificate", "patent", "water safety", "weather app", "password generator", "qr code", "traffic ai", "student record", etc.
-const UNSLASH_HERO_BG =
-  "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-const UNSLASH_SKILLS_BG =
-  "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-const UNSLASH_ACHIEVEMENTS_BG =
-  "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-const UNSLASH_INTERNSHIPS_BG =
-  "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-const UNSLASH_PROJECTS_BG =
-  "https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-const UNSLASH_EDUCATION_BG =
-  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-const UNSLASH_CERTIFICATIONS_BG =
-  "https://images.unsplash.com/photo-1518976024611-28e4c7891247?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-const UNSLASH_PATENTS_BG =
-  "https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-const UNSLASH_TOOLS_BG =
-  "https://images.unsplash.com/photo-1604964432806-254d07c11f32?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-const UNSLASH_LANGUAGES_BG =
-  "https://images.unsplash.com/photo-1563841930606-77ef4526b153?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-const UNSLASH_INTERESTS_BG =
-  "https://images.unsplash.com/photo-1535223289827-42f30e9a013f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-const UNSLASH_SOFT_SKILLS_BG =
-  "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
-
 const skills = [
-  // Full Stack Core
-  "React.js",
-  "Node.js",
-  "Express.js",
-
-  // Backend | Java
-  "Java",
-  "Spring Boot",
-  "Hibernate",
-  "JDBC",
-  "Maven",
-
-  // Databases
-  "MySQL",
-  "PostgreSQL",
-  "MongoDB",
-
-  // Other
-  "REST APIs",
-  "Deluge",
-  "Zoho Sigma",
+  { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" }, // Note: Express icon often dark, check contrast or use generic
+  { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+  { name: "Spring Boot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
+  { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+  { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+  { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+  { name: "Maven", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg" },
+  { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+  { name: "Zoho Deluge", icon: "https://img.icons8.com/color/48/000000/code.png" }, // Fallback/Generic
+  { name: "REST APIs", icon: "https://img.icons8.com/nolan/64/api-settings.png" },
 ];
 
-
-const achievements = [
-  "Zoho Corporation Extension Developer Internship",
-  "Amizhth InfoTech React Developer Internship",
-  "AURA’24 Hackathon – 3rd Prize (Bannari Amman Institute of Technology)",
-  "Patent Holder (QR Code Water Can System, filed 2024)",
-];
-const internships = [
+const experience = [
   {
-    title: "ZOHO CORPORATION – CRM Extension Developer",
-    period: "Jul–Aug 2025",
-    details:
-      "Worked on Zoho Marketplace extension development, automation, and integrations using Deluge scripting and REST APIs.",
+    title: "CRM Extension Developer",
+    company: "ZOHO CORPORATION",
+    period: "Jul 2025 – Aug 2025",
+    points: [
+      "Developed Zoho Marketplace extensions using Deluge scripting and REST APIs.",
+      "Automated critical business workflows for CRM users.",
+      "Integrated third-party services like Google Maps and payment gateways."
+    ],
   },
   {
-    title: "Amizhth InfoTech – React Developer",
-    period: "Sep–Nov 2025",
-    details:
-      "Built and improved frontend features with React.js and Material-UI, integrated REST APIs, and optimized UI/UX.",
+    title: "React Developer Intern",
+    company: "Amizhth InfoTech",
+    period: "Sep 2025 – Dec 2025",
+    points: [
+      "Built responsive frontend features with React.js and Material-UI.",
+      "Optimized application performance and improved load times by 20%.",
+      "Collaborated with backend teams to integrate RESTful services."
+    ],
   },
 ];
+
 const projects = [
   {
     name: "Zoho CRM Duplicate Detector",
     details:
-      "Zoho CRM extension detecting duplicates (Leads, Contacts, Accounts) by email/phone. Integrated with Deluge, CRM APIs, Sigma widgets, and custom modules.",
+      "Automated extension to detect duplicate Leads/Contacts via email and phone, ensuring data consistency for high-volume CRM accounts.",
+    tech: ["Deluge", "Zoho CRM API", "Sigma"],
   },
   {
-    name: "Smart QR-Based Water Can Monitoring System",
-    github:
-      "https://github.com/Antony-Godwin24/Smart-QR-Based-Water-Can-Monitoring-System-for-Safe-Reuse-and-Sustainability-Full-Stack",
+    name: "Smart Water Monitoring System",
+    github: "https://github.com/Antony-Godwin24/Smart-QR-Based-Water-Can-Monitoring-System-for-Safe-Reuse-and-Sustainability-Full-Stack",
     details:
-      "Full-stack system with JWT auth, admin panel, Express.js + MySQL backend, QR-based tracking, and quality monitoring.",
+      "Full-stack IoT system featuring QR-based tracking for real-time water quality and usage monitoring. Includes Admin/User dashboards.",
+    tech: ["React.js", "Node.js", "MySQL", "IoT"],
   },
   {
-    name: "Traffic Violation Detection System – AI/ML",
+    name: "Traffic Violation Detection",
     github: "https://github.com/Antony-Godwin24/TrafficViolationSystem",
     details:
-      "Computer vision system detecting traffic violations using OpenCV, YOLO, CNNs. Alerts authorities via dashboard/API.",
+      "Computer vision system utilizing OpenCV & YOLO for automated traffic violation detection, report generation, and authority alerting.",
+    tech: ["Python", "OpenCV", "YOLO", "CNN"],
   },
   {
-    name: "Students Record Management",
+    name: "Student Record Management",
     github: "https://github.com/Antony-Godwin24/Students-Record-Management",
     details:
-      "Role-based student portal (React.js, Express.js, MySQL, JWT, bcrypt). Admin–student CRUD operations with secure auth.",
+      "Secure academic portal featuring role-based access control, JWT authentication, and Bcrypt hashing for student record management.",
+    tech: ["React.js", "Express", "MySQL", "JWT"],
   },
-];
-
-
-const education = [
-  {
-    institute: "K. Ramakrishnan College of Engineering",
-    degree: "BE Computer Science and Engineering",
-    period: "2023–2027",
-    details: "",
-  },
-];
-const certifications = [
-  "Zoho Corporation – Extension Developer Internship",
-  "NPTEL – Introduction to Internet of Things (Elite)",
-  "NPTEL – Introduction to Operating Systems",
-];
-const patents = [
-  {
-    title: "A System for Enhancing Quality of Water Can Through QR Code",
-    year: "2024",
-    details:
-      "Patent system to improve public health and water safety via QR codes on water cans for usage tracking, quality status, payment blocking, and real-time sensor integration. Filed by K. Ramakrishnan College of Engineering.",
-  },
-];
-const tools = [
-  "VS Code",
-  "Eclipse",
-  "Git & GitHub",
-  "EmailJS",
-  "MySQL Workbench",
-  "Canva",
-  "Vercel",
-  "Postman",
-  "MongoDB",
-  "Zoho Tools",
-];
-const languages = ["Tamil", "English"];
-const interests = [
-  "MERN Full Stack Development",
-  "Problem Solving",
-  "Technical Blogging",
-  "Startups & Innovation",
-];
-const softSkills = [
-  "Leadership & Teamwork",
-  "Effective Communication",
-  "Time & Priority Management",
-  "Fast Learning & Adaptability",
-  "Critical & Analytical Thinking",
-  "Problem Solving Under Pressure",
 ];
 
 export default function App() {
-  const [avatarHovered, setAvatarHovered] = useState(false);
-
   return (
     <ThemeProvider theme={theme}>
       <Box sx={styles.container}>
         <NavBar />
 
         {/* Hero Section */}
-        <Box id="hero" sx={styles.hero}>
-          <Box
-            component="img"
-            src={UNSLASH_HERO_BG} // YOUR UNSLASH HERO IMAGE URL
-            alt="Computer Science Student"
-            sx={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              zIndex: 0,
-              filter: "brightness(0.5) blur(2px)",
-            }}
-          />
+        <Box id="hero" component="section" sx={styles.hero}>
           <Box sx={styles.heroContent}>
-            <Avatar
-              src={profilePic}
-              sx={{
-                ...styles.avatar,
-                transform: avatarHovered ? "scale(1.08)" : "scale(1)",
-                boxShadow: avatarHovered
-                  ? "0 0 24px rgba(255, 0, 127, 0.5)"
-                  : "none",
-              }}
-              onMouseEnter={() => setAvatarHovered(true)}
-              onMouseLeave={() => setAvatarHovered(false)}
-            />
-            <Typography variant="h2" sx={styles.heroTitle}>
-              Antony Godwin S
-            </Typography>
-            <Typography variant="h5" sx={styles.heroSubtitle}>
-              Computer Science student and full-stack developer with hands-on experience in 
-MERN, PERN, and Java Spring Boot development. Strong in 
-building production-ready applications, backend APIs, and database-heavy 
-systems. Interned at Zoho as an Extension Developer working with Deluge, 
-CRM APIs, and custom modules.
-
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                color: "rgba(255,255,255,0.9)",
-                mb: 4,
-                maxWidth: "600px",
-                mx: "auto",
-              }}
-            >
-              Computer Science student and passionate developer with hands-on
-              experience building responsive, functional web apps. Interned at
-              Zoho and Amizhth, contributor to real-world projects with
-              React.js, Node.js, MongoDB, MySQL, Java, and modern dev tools.
-            </Typography>
-            <a href={Resume} download style={{ textDecoration: "none" }}>
-              <Button
-                variant="contained"
-                color="secondary"
-                startIcon={<Download />}
-                sx={styles.downloadBtn}
-              >
-                Download Resume
-              </Button>
-            </a>
+            <Box sx={styles.heroText}>
+                <Typography sx={styles.heroPrefix}>Hi, my name is</Typography>
+                <Typography variant="h1" sx={styles.heroTitle}>
+                  Antony Godwin S.
+                </Typography>
+                <Typography variant="h2" sx={styles.heroSubtitle}>
+                  I'm a <span style={{ color: "#64ffda" }}>Java Spring Boot</span> & <br />
+                  Full Stack Developer.
+                </Typography>
+                <Typography sx={styles.heroDescription}>
+                  I specialize in building accessible, exceptional digital experiences. 
+                  Currently, I'm focused on developing scalable, product-ready applications 
+                  at <strong>Zoho Corporation</strong>.
+                </Typography>
+                <Link 
+                  href={Resume} 
+                  target="_blank" 
+                  underline="none"
+                  sx={styles.downloadBtn}
+                >
+                  Check out my Resume!
+                </Link>
+            </Box>
+            
+            {/* Profile Photo */}
+            <Box sx={styles.avatarContainer}>
+                 <Box component="img" src={profilePic} alt="Profile" sx={styles.avatar} />
+            </Box>
           </Box>
         </Box>
 
-        {/* Skills Section */}
-        <Box
-          id="skills"
-          sx={styles.sectionWithImage}
-          style={{ backgroundImage: `url(${UNSLASH_SKILLS_BG})` }}
-        >
-          <Box sx={styles.sectionContent}>
-            <Typography variant="h4" sx={styles.sectionTitle}>
-              Skills
+        {/* About Section */}
+        <Box id="about" component="section" sx={styles.section}>
+            <Typography variant="h3" sx={styles.sectionTitle}>
+                About Me
             </Typography>
-            <Grid container spacing={2} sx={{ justifyContent: "center" }}>
-              {skills.map((skill, idx) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
-                  <Paper sx={styles.bigCard}>
-                    <Typography
-                      variant="body1"
-                      sx={{ fontWeight: 600, color: "primary.main" }}
-                    >
-                      <Code sx={{ mr: 1, verticalAlign: "middle" }} /> {skill}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
+            <Box sx={{ maxWidth: "900px", mx: "auto" }}>
+
+                <Typography sx={styles.aboutText}>
+  Hello! I’m Antony Godwin S, a full-stack developer who enjoys building 
+  reliable, scalable applications that solve real-world problems. 
+  My journey into development began in 2023, driven by curiosity and a desire 
+  to understand how things work beyond the UI.
+</Typography>
+
+<Typography sx={styles.aboutText}>
+  Over time, I’ve worked across frontend and backend technologies, building 
+  production-oriented applications using React, Node.js, Java, and Spring Boot. 
+  I’ve also had hands-on experience developing Zoho Marketplace extensions, 
+  integrating APIs, and automating workflows for real business use cases.
+</Typography>
+
+<Typography sx={styles.aboutText}>
+  Today, my focus is on writing clean, maintainable code and designing systems 
+  that are efficient, secure, and user-centric. I enjoy working close to the 
+  product, understanding requirements deeply, and turning ideas into 
+  dependable software.
+</Typography>
+
+<Typography sx={styles.aboutText}>
+  Here are a few technologies I’ve been working with recently:
+</Typography>
+
+            </Box>
         </Box>
 
-        {/* Achievements Section */}
-        <Box
-          id="achievements"
-          sx={styles.sectionWithImage}
-          style={{ backgroundImage: `url(${UNSLASH_ACHIEVEMENTS_BG})` }}
-        >
-          <Box sx={styles.sectionContent}>
-            <Typography variant="h4" sx={styles.sectionTitle}>
-              Achievements
+        {/* Experience Section (Reordered: First) */}
+        <Box id="experience" component="section" sx={styles.section}>
+             <Typography variant="h3" sx={styles.sectionTitle}>
+                Where I've Worked
             </Typography>
-            <Grid container spacing={3} sx={{ justifyContent: "center" }}>
-              {achievements.map((ach, idx) => (
-                <Grid item xs={12} md={6} key={idx}>
-                  <Paper sx={styles.cardWithIcon}>
-                    <EmojiEvents
-                      sx={{ fontSize: 40, mb: 1, color: "secondary.main" }}
-                    />
-                    <Typography variant="h6" sx={{ mb: 1 }}>
-                      {ach}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
+            <Box sx={{ maxWidth: "700px", margin: "0 auto" }}>
+                {experience.map((job, idx) => (
+                    <Box key={idx} sx={styles.expCard}>
+                        <Typography sx={styles.expTitle}>
+                            {job.title} <span style={styles.expCompany}>@ {job.company}</span>
+                        </Typography>
+                        <Typography sx={styles.expDuration}>{job.period}</Typography>
+                        <Box component="ul" sx={styles.expPoints}>
+                            {job.points.map((pt, i) => (
+                                <li key={i}>{pt}</li>
+                            ))}
+                        </Box>
+                    </Box>
+                ))}
+            </Box>
         </Box>
 
-        {/* Internships Section */}
-        <Box
-          id="internships"
-          sx={styles.sectionWithImage}
-          style={{ backgroundImage: `url(${UNSLASH_INTERNSHIPS_BG})` }}
-        >
-          <Box sx={styles.sectionContent}>
-            <Typography variant="h4" sx={styles.sectionTitle}>
-              Internships
+        {/* Projects Section (Reordered: Second) */}
+        <Box id="projects" component="section" sx={styles.section}>
+            <Typography variant="h3" sx={styles.sectionTitle}>
+                Some Things I've Built
             </Typography>
-            <Grid container spacing={3} sx={{ justifyContent: "center" }}>
-              {internships.map((intern, idx) => (
-                <Grid item xs={12} key={idx}>
-                  <Paper sx={styles.card}>
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      {intern.title}
-                    </Typography>
-                    <Typography variant="subtitle2" color="text.secondary">
-                      {intern.period}
-                    </Typography>
-                    <Typography variant="body2" sx={{ mt: 1 }}>
-                      {intern.details}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
+            <Box sx={styles.gridContainer}>
+                {projects.map((proj, idx) => (
+                    <Box key={idx} sx={styles.projectCard}>
+                        <Box>
+                            <Box sx={styles.projectHeader}>
+                                <FolderOpen sx={styles.projectFolderIcon} />
+                                <Box sx={styles.projectLinks}>
+                                    {proj.github && (
+                                        <Link href={proj.github} target="_blank">
+                                            <GitHub />
+                                        </Link>
+                                    )}
+                                </Box>
+                            </Box>
+                            <Typography sx={styles.projectTitle}>
+                                {proj.name}
+                            </Typography>
+                            <Typography sx={styles.projectDescription}>
+                                {proj.details}
+                            </Typography>
+                        </Box>
+                        <Box sx={styles.techStack}>
+                             {proj.tech.map((t, i) => (
+                                 <span key={i}>{t}</span>
+                             ))}
+                        </Box>
+                    </Box>
+                ))}
+            </Box>
         </Box>
 
-        {/* Projects Section */}
-        <Box
-          id="projects"
-          sx={styles.sectionWithImage}
-          style={{ backgroundImage: `url(${UNSLASH_PROJECTS_BG})` }}
-        >
-          <Box sx={styles.sectionContent}>
-            <Typography variant="h4" sx={styles.sectionTitle}>
-              Projects
+        {/* Skills Section (Moved here & Redesigned) */}
+        <Box id="skills" component="section" sx={styles.section}>
+             <Typography variant="h3" sx={styles.sectionTitle}>
+                Technical Skills
             </Typography>
-            <Grid container spacing={3} sx={{ justifyContent: "center" }}>
-              {projects.map((proj, idx) => (
-                <Grid item xs={12} sm={6} md={4} key={idx}>
-                  <Paper sx={styles.bigCard}>
-                    <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
-                      {proj.name}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ mb: 2, textAlign: "center" }}
-                    >
-                      {proj.details}
-                    </Typography>
-                    {(proj.link || proj.github) && (
-                      <Box sx={styles.projectLinks}>
-                        {proj.link && (
-                          <Link
-                            href={proj.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Live
-                          </Link>
-                        )}
-                        {proj.github && (
-                          <Link
-                            href={proj.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            GitHub
-                          </Link>
-                        )}
-                      </Box>
-                    )}
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Box>
-
-        {/* Education Section */}
-        <Box
-          id="education"
-          sx={styles.sectionWithImage}
-          style={{ backgroundImage: `url(${UNSLASH_EDUCATION_BG})` }}
-        >
-          <Box sx={styles.sectionContent}>
-            <Typography variant="h4" sx={styles.sectionTitle}>
-              Education
-            </Typography>
-            <Grid container spacing={3}>
-              {education.map((edu, idx) => (
-                <Grid item xs={12} key={idx}>
-                  <Paper sx={styles.cardWithIcon}>
-                    <School
-                      sx={{ fontSize: 40, mb: 1, color: "secondary.main" }}
-                    />
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      {edu.institute}
-                    </Typography>
-                    <Typography variant="subtitle2" sx={{ mb: 1 }}>
-                      {edu.degree} ({edu.period})
-                    </Typography>
-                    <Typography variant="body2">{edu.details}</Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Box>
-
-        {/* Certifications Section */}
-        <Box
-          id="certifications"
-          sx={styles.sectionWithImage}
-          style={{ backgroundImage: `url(${UNSLASH_CERTIFICATIONS_BG})` }}
-        >
-          <Box sx={styles.sectionContent}>
-            <Typography variant="h4" sx={styles.sectionTitle}>
-              Certifications
-            </Typography>
-            <Grid container spacing={3} sx={{ justifyContent: "center" }}>
-              {certifications.map((cert, idx) => (
-                <Grid item xs={12} sm={6} key={idx}>
-                  <Paper sx={styles.cardWithIcon}>
-                    <WorkspacePremium
-                      sx={{ fontSize: 40, mb: 1, color: "secondary.main" }}
-                    />
-                    <Typography variant="h6">{cert}</Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Box>
-
-        {/* Patents Section */}
-        <Box
-          id="patents"
-          sx={styles.sectionWithImage}
-          style={{ backgroundImage: `url(${UNSLASH_PATENTS_BG})` }}
-        >
-          <Box sx={styles.sectionContent}>
-            <Typography variant="h4" sx={styles.sectionTitle}>
-              Patents
-            </Typography>
-            <Grid container spacing={3}>
-              {patents.map((pat, idx) => (
-                <Grid item xs={12} key={idx}>
-                  <Paper sx={styles.cardWithIcon}>
-                    <EmojiObjects
-                      sx={{ fontSize: 40, mb: 1, color: "secondary.main" }}
-                    />
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      {pat.title}
-                    </Typography>
-                    <Typography variant="subtitle2">{pat.year}</Typography>
-                    <Typography variant="body2" sx={{ mt: 1 }}>
-                      {pat.details}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Box>
-
-        {/* Tools Section */}
-        <Box
-          id="tools"
-          sx={styles.sectionWithImage}
-          style={{ backgroundImage: `url(${UNSLASH_TOOLS_BG})` }}
-        >
-          <Box sx={styles.sectionContent}>
-            <Typography variant="h4" sx={styles.sectionTitle}>
-              Tools
-            </Typography>
-            <Grid container spacing={2} sx={{ justifyContent: "center" }}>
-              {tools.map((tool, idx) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
-                  <Paper sx={styles.bigCard}>
-                    <Typography
-                      variant="body1"
-                      sx={{ fontWeight: 600, color: "primary.main" }}
-                    >
-                      <Build sx={{ mr: 1, verticalAlign: "middle" }} /> {tool}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Box>
-
-        {/* Languages Section */}
-        <Box
-          id="languages"
-          sx={styles.sectionWithImage}
-          style={{ backgroundImage: `url(${UNSLASH_LANGUAGES_BG})` }}
-        >
-          <Box sx={styles.sectionContent}>
-            <Typography variant="h4" sx={styles.sectionTitle}>
-              Languages
-            </Typography>
-            <Grid container spacing={2} sx={{ justifyContent: "center" }}>
-              {languages.map((lang, idx) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
-                  <Paper sx={styles.bigCard}>
-                    <Typography
-                      variant="body1"
-                      sx={{ fontWeight: 600, color: "primary.main" }}
-                    >
-                      <Translate sx={{ mr: 1, verticalAlign: "middle" }} />{" "}
-                      {lang}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Box>
-
-        {/* Interests Section */}
-        <Box
-          id="interests"
-          sx={styles.sectionWithImage}
-          style={{ backgroundImage: `url(${UNSLASH_INTERESTS_BG})` }}
-        >
-          <Box sx={styles.sectionContent}>
-            <Typography variant="h4" sx={styles.sectionTitle}>
-              Interests
-            </Typography>
-            <Grid container spacing={2} sx={{ justifyContent: "center" }}>
-              {interests.map((interest, idx) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
-                  <Paper sx={styles.bigCard}>
-                    <Typography
-                      variant="body1"
-                      sx={{ fontWeight: 600, color: "primary.main" }}
-                    >
-                      <Star sx={{ mr: 1, verticalAlign: "middle" }} />{" "}
-                      {interest}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Box>
-
-        {/* Soft Skills Section */}
-        <Box
-          id="soft-skills"
-          sx={styles.sectionWithImage}
-          style={{ backgroundImage: `url(${UNSLASH_SOFT_SKILLS_BG})` }}
-        >
-          <Box sx={styles.sectionContent}>
-            <Typography variant="h4" sx={styles.sectionTitle}>
-              Soft Skills
-            </Typography>
-            <Grid container spacing={2} sx={{ justifyContent: "center" }}>
-              {softSkills.map((skill, idx) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={idx}>
-                  <Paper sx={styles.bigCard}>
-                    <Typography
-                      variant="body1"
-                      sx={{ fontWeight: 600, color: "primary.main" }}
-                    >
-                      <Psychology sx={{ mr: 1, verticalAlign: "middle" }} />{" "}
-                      {skill}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
+            <Box sx={styles.skillsGrid}>
+                {skills.map((skill, i) => (
+                    <Box key={i} sx={styles.techCard}>
+                        <Box component="img" src={skill.icon} alt={skill.name} sx={styles.techIcon} />
+                        <Typography sx={styles.techName}>{skill.name}</Typography>
+                    </Box>
+                ))}
+            </Box>
         </Box>
 
         {/* Contact Section */}
-        <ContactForm />
+        <Box id="contact" component="section" sx={{ ...styles.section, textAlign: "center" }}>
+            <Typography variant="h3" sx={{ ...styles.sectionTitle, justifyContent: "center", "&:after": { display: "none" } }}>
+                What's Next?
+            </Typography>
+            <Typography variant="h2" sx={{ color: "#e6f1ff", fontWeight: 700, mb: 3 }}>
+                Get In Touch
+            </Typography>
+            <Typography sx={{ 
+                color: "#8892b0", 
+                maxWidth: "600px", 
+                width: "100%", // Ensure it respects container width
+                mx: "auto", 
+                mb: 5, 
+                fontSize: "1.1rem",
+                px: 2 // Add internal padding as slight buffer
+            }}>
+                I'm currently looking for new opportunities, and my inbox is always open. 
+                Whether you have a question or just want to say hi, I'll try my best to get back to you!
+            </Typography>
+            
+            <Box sx={styles.formContainer}>
+                 <ContactForm />
+            </Box>
+        </Box>
 
         {/* Footer */}
         <Box sx={styles.footer}>
-          <Box sx={styles.socialIcons}>
-            <Link
-              href="https://github.com/Antony-Godwin24"
-              target="_blank"
-              color="text.primary"
-            >
-              <GitHub fontSize="large" />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/antony-godwin-s-7143ab2a4/"
-              target="_blank"
-              color="text.primary"
-            >
-              <LinkedIn fontSize="large" />
-            </Link>
-          </Box>
-          <Typography variant="subtitle2" color="text.secondary">
-            © {new Date().getFullYear()} Antony Godwin S
-          </Typography>
+             <Box sx={styles.socialIcons}>
+                <Link href="https://github.com/Antony-Godwin24" target="_blank">
+                    <GitHub />
+                </Link>
+                <Link href="https://www.linkedin.com/in/antony-godwin-s-7143ab2a4/" target="_blank">
+                    <LinkedIn />
+                </Link>
+             </Box>
+            <Typography sx={{ fontFamily: '"Fira Code", monospace' }}>
+                Designed & Built by Antony Godwin S
+            </Typography>
         </Box>
       </Box>
     </ThemeProvider>

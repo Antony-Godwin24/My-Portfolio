@@ -1,99 +1,106 @@
-import React from "react";
-import { Box, Typography, TextField, Button, Paper } from "@mui/material";
+import React, { useState } from "react";
+import { Box, TextField, Button, Snackbar, Alert } from "@mui/material";
+import { Send } from "@mui/icons-material";
 import styles from "./style";
+import { sendContactEmail } from "./emailService";
 
 export default function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+  const [loading, setLoading] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success"
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-
+    setLoading(true);
+    
     try {
-      const response = await fetch("https://formspree.io/f/mgvldyja", {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
+      await sendContactEmail(formData);
+      setSnackbar({
+        open: true,
+        message: "Message sent successfully!",
+        severity: "success"
       });
-      if (response.ok) {
-        alert("🎉 Message sent successfully! We'll get back to you soon.");
-        form.reset();
-      } else {
-        alert(
-          "❌ Something went wrong. Please try again or contact us directly."
-        );
-      }
+      setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      alert("❌ Network error. Please check your connection and try again.");
+      setSnackbar({
+        open: true,
+        message: error.message || "Failed to send message.",
+        severity: "error"
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <Box
-      id="contact"
-      sx={styles.sectionWithImage}
-      style={{
-        backgroundImage: `url(https://images.unsplash.com/photo-1581092334565-5cbfefc5809b?auto=format&fit=crop&w=2000&q=80)`,
-      }}
-    >
-      <Box sx={styles.sectionContent}>
-        <Typography variant="h4" sx={styles.sectionTitle}>
-          Contact Me
-        </Typography>
-        <Paper
-          elevation={0}
-          sx={{
-            ...styles.contactFormCard,
-            width: "100%",
-            maxWidth: "600px",
-          }}
-        >
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 3,
-            }}
-          >
-            <TextField
-              name="name"
-              label="Your Name"
-              variant="outlined"
-              fullWidth
-              sx={styles.contactFormField}
-              required
-            />
-            <TextField
-              name="email"
-              label="Your Email"
-              type="email"
-              variant="outlined"
-              fullWidth
-              sx={styles.contactFormField}
-              required
-            />
-            <TextField
-              name="message"
-              label="Message"
-              multiline
-              rows={4}
-              variant="outlined"
-              fullWidth
-              sx={styles.contactFormField}
-              required
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              sx={styles.contactFormButton}
-            >
-              Send Message
-            </Button>
-          </Box>
-        </Paper>
+    <Box component="form" onSubmit={handleSubmit}>
+      <Box sx={styles.inputField}>
+        <TextField
+          fullWidth
+          label="Name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          variant="outlined"
+          required
+        />
       </Box>
+      <Box sx={styles.inputField}>
+        <TextField
+          fullWidth
+          label="Email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          variant="outlined"
+          required
+        />
+      </Box>
+      <Box sx={styles.inputField}>
+        <TextField
+          fullWidth
+          label="Message"
+          name="message"
+          multiline
+          rows={4}
+          value={formData.message}
+          onChange={handleChange}
+          variant="outlined"
+          required
+        />
+      </Box>
+      
+      <Button 
+        type="submit" 
+        sx={styles.submitBtn} 
+        disabled={loading}
+        endIcon={<Send />}
+      >
+        {loading ? "Sending..." : "Send Message"}
+      </Button>
+
+      <Snackbar 
+        open={snackbar.open} 
+        autoHideDuration={6000} 
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+      >
+        <Alert severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
