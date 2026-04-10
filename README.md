@@ -1,40 +1,111 @@
-# ANTONY GODWIN S
+# ANTONY GODWIN S  
+Portfolio: https://antony-godwin-s-portfolio.vercel.app/
 
-**AWS Certified Full Stack Developer | 3rd-year Bachelor of Engineering in Computer Science (2023-2027) | Zoho Experience**
+Full Stack Developer (React.js | Node.js | Spring Boot) | AWS Certified | CSE Undergraduate (2023–2027)
 
-ANTONY GODWIN S specializes in React.js, Node.js, and Spring Boot to build scalable, production-ready systems. He is the innovator behind **Claridux**, an AI-driven platform for job readiness that uses PRS and skill gap analysis to solve the personal challenge of navigating complex study paths. 
+---
 
-## Professional Bio
+## About Me
 
-ANTONY GODWIN S is a dedicated developer with a strong focus on bridging the gap between hardware tracking and intelligent software systems. With an internship at **Zoho**, multiple prizes in hackathons, and an **AWS Certification**, he brings a disciplined approach to building reliable product architectures. He is the innovator behind a 2024 **Smart QR Water Can Monitoring System** (Patent Applied), born from a passion for solving practical operational problems.
+I build scalable, production-ready web applications with a strong focus on solving real-world problems.
 
-## Quick Links
+I am a third-year Computer Science student with hands-on experience in:
+- Full stack development (React, Node.js, Spring Boot)
+- Database design (MySQL, PostgreSQL)
+- API development, authentication, and system architecture
 
-- **LinkedIn**: [Antony Godwin S](https://www.linkedin.com/in/antony-godwin-s-7143ab2a4/)
-- **GitHub**: [Antony-Godwin24](https://github.com/Antony-Godwin24)
-- **LeetCode**: [Antony_Godwin](https://leetcode.com/u/Antony_Godwin/)
-- **Email**: [antonygodwin08@gmail.com](mailto:antonygodwin08@gmail.com)
+I have worked in a Zoho development environment, built multiple projects, and actively prepare for roles in product-based companies.
 
-## Project Overview
+---
 
-- **Education Layer**: Active student of Bachelor of Engineering in Computer Science and Engineering at KRCE, Trichy, Tamil Nadu (2023-2027).
-- **Patent Status**: Innovator of "A System For Enhancing Quality Of Water Can Through QR Code" (Patent Applied 2024).
-- **Responsive UI/UX**: Rebuilt with spacious layouts and consistent transitions.
-- **Content Engine**: Dynamic section loading from structured local asset layers.
+## Key Differentiator
 
-## Tech Stack
+Most students build projects. I focus on building systems with:
+- Clearly defined problem statements  
+- Structured and scalable architecture  
+- Practical, real-world use cases  
 
-- **Frontend**: React 19, Material UI
-- **Backend**: Node.js, Spring Boot
-- **Database**: PostgreSQL, MySQL
+### Claridux (Flagship Project)
 
-## Setup & Run
+An AI-driven job readiness platform that:
+- Uses a Personalized Readiness Score (PRS)
+- Identifies skill gaps
+- Generates structured learning paths
 
-1. **Install dependencies**: `npm install`
-2. **Launch development server**: `npm start`
-3. **Production build**: `npm run build`
+This project addresses a common problem: lack of clarity in what to learn next.
+
+---
+
+## Experience
+
+### Zoho Developer Experience
+
+Worked on:
+- CRM integrations
+- Extension development
+- API-driven workflows
+
+Gained experience in:
+- Production-level architecture
+- Debugging real-world issues
+- Writing maintainable and structured code
+
+---
+
+## Projects
+
+### Smart QR Water Can Monitoring System (Patent Applied – 2024)
+- Tracks water can quality using QR codes
+- Integrates hardware and software systems
+- Focused on operational efficiency in real-world scenarios
+
+### Claridux (AI-Based Career Platform)
+- Skill analysis engine
+- Personalized roadmap generation
+- Built using modern full-stack architecture
+
+### Full Stack Applications
+- Authentication systems (JWT, bcrypt)
+- REST API design
+- CRUD operations with validation and error handling
+
+---
+
+## Technical Skills
+
+Frontend:
+- React.js (Hooks, Component Architecture)
+- Material UI
+
+Backend:
+- Node.js (Express.js)
+- Java Spring Boot
+
+Database:
+- MySQL
+- PostgreSQL
+
+---
+
+## Links
+
+GitHub: https://github.com/Antony-Godwin24  
+LinkedIn: https://www.linkedin.com/in/antony-godwin-s-7143ab2a4/  
+LeetCode: https://leetcode.com/u/Antony_Godwin/  
+Email: antonygodwin08@gmail.com  
+
+---
+
+## Run Locally
+
+```bash
+npm install
+npm start
+```
+
+---
 
 ## Notes
 
-- Resume download points to `src/assets/Resume/ANTONY GODWIN S.pdf`.
-- All environmental and strategic documents are restricted via `.gitignore`.
+- Resume is available in the project assets  
+- Environment configuration files are secured using `.gitignore`
