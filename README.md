@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# ANTONY GODWIN S
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**AWS Certified Full Stack Developer | 3rd-year Bachelor of Engineering in Computer Science (2023-2027) | Zoho Experience**
 
-## Available Scripts
+ANTONY GODWIN S specializes in React.js, Node.js, and Spring Boot to build scalable, production-ready systems. He is the innovator behind **Claridux**, an AI-driven platform for job readiness that uses PRS and skill gap analysis to solve the personal challenge of navigating complex study paths. 
 
-In the project directory, you can run:
+## Professional Bio
 
-### `npm start`
+ANTONY GODWIN S is a dedicated developer with a strong focus on bridging the gap between hardware tracking and intelligent software systems. With an internship at **Zoho**, multiple prizes in hackathons, and an **AWS Certification**, he brings a disciplined approach to building reliable product architectures. He is the innovator behind a 2024 **Smart QR Water Can Monitoring System** (Patent Applied), born from a passion for solving practical operational problems.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Quick Links
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **LinkedIn**: [Antony Godwin S](https://www.linkedin.com/in/antony-godwin-s-7143ab2a4/)
+- **GitHub**: [Antony-Godwin24](https://github.com/Antony-Godwin24)
+- **LeetCode**: [Antony_Godwin](https://leetcode.com/u/Antony_Godwin/)
+- **Email**: [antonygodwin08@gmail.com](mailto:antonygodwin08@gmail.com)
 
-### `npm test`
+## Project Overview
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Education Layer**: Active student of Bachelor of Engineering in Computer Science and Engineering at KRCE, Trichy, Tamil Nadu (2023-2027).
+- **Patent Status**: Innovator of "A System For Enhancing Quality Of Water Can Through QR Code" (Patent Applied 2024).
+- **Responsive UI/UX**: Rebuilt with spacious layouts and consistent transitions.
+- **Content Engine**: Dynamic section loading from structured local asset layers.
 
-### `npm run build`
+## Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Frontend**: React 19, Material UI
+- **Backend**: Node.js, Spring Boot
+- **Database**: PostgreSQL, MySQL
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Setup & Run
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Install dependencies**: `npm install`
+2. **Launch development server**: `npm start`
+3. **Production build**: `npm run build`
 
-### `npm run eject`
+## Notes
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Resume download points to `src/assets/Resume/ANTONY GODWIN S.pdf`.
+- All environmental and strategic documents are restricted via `.gitignore`.
