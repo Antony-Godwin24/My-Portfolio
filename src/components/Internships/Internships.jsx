@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Chip, Link, Stack, Typography } from "@mui/material";
-import WorkOutlineRoundedIcon from "@mui/icons-material/WorkOutlineRounded";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
 

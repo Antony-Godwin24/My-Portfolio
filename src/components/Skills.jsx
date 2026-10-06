@@ -1,11 +1,10 @@
 import React from "react";
-import { Box, Chip, Stack, Typography } from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import CodeOutlinedIcon from "@mui/icons-material/CodeOutlined";
 import WebOutlinedIcon from "@mui/icons-material/WebOutlined";
 import StorageOutlinedIcon from "@mui/icons-material/StorageOutlined";
 import BuildOutlinedIcon from "@mui/icons-material/BuildOutlined";
 import DnsOutlinedIcon from "@mui/icons-material/DnsOutlined";
-import TranslateOutlinedIcon from "@mui/icons-material/TranslateOutlined";
 
 const skillGroups = [
   {
