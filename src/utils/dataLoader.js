@@ -11,7 +11,6 @@ import {
   parseHackathon,
   parseInternship,
   parseProject,
-  parseSkills,
   rewriteAbout,
 } from "./dataParser";
 
@@ -20,7 +19,6 @@ const fetchText = async (url) => {
   if (!response.ok) {
     throw new Error(`Failed to load content from ${url}`);
   }
-
   return response.text();
 };
 
@@ -39,20 +37,34 @@ const mergeWithFallback = (parsed, fallback = {}) => {
   return merged;
 };
 
+// Skills sourced directly from the updated resume (single source of truth)
+const resumeSkills = {
+  languages: ["Java", "JavaScript"],
+  frontend: ["HTML5", "CSS3", "React.js"],
+  backend: ["Node.js", "Express.js", "Spring Boot", "REST APIs"],
+  databases: ["MySQL"],
+  tools: ["Git", "GitHub"],
+  subjects: ["Data Structures & Algorithms", "OOP", "DBMS"],
+};
+
 export const loadAllData = async () => {
-  const [aboutText, skillsText] = await Promise.all([
+  const [aboutText] = await Promise.all([
     fetchText(profileAssets.aboutTextUrl),
-    fetchText(profileAssets.skillsTextUrl),
   ]);
 
   const [projects, internships, hackathons, certificates] = await Promise.all([
+    // Projects
     Promise.all(
       projectSources.map(async (source) =>
         withMedia(
           {
             github: source.github || "",
             live: source.live || "",
+            patentApplied: source.patentApplied || false,
+            isConcept: source.isConcept || false,
             ...parseProject(await fetchText(source.textUrl)),
+            ...(source.titleOverride ? { title: source.titleOverride } : {}),
+            ...(source.summaryOverride ? { summary: source.summaryOverride, solution: source.summaryOverride } : {}),
           },
           {
             slug: source.slug,
@@ -62,6 +74,8 @@ export const loadAllData = async () => {
         )
       )
     ),
+
+    // Internships
     Promise.all(
       internshipSources.map(async (source) =>
         withMedia(parseInternship(await fetchText(source.textUrl)), {
@@ -71,10 +85,17 @@ export const loadAllData = async () => {
         })
       )
     ),
+
+    // Hackathons
     Promise.all(
       hackathonSources.map(async (source) =>
         withMedia(
-          mergeWithFallback(parseHackathon(await fetchText(source.textUrl)), source.fallback),
+          mergeWithFallback(
+            source.textUrl
+              ? parseHackathon(await fetchText(source.textUrl))
+              : {},
+            source.fallback
+          ),
           {
             slug: source.slug,
             media: source.media,
@@ -82,31 +103,49 @@ export const loadAllData = async () => {
         )
       )
     ),
+
+    // Certificates — some may be hardcoded (no txt file)
     Promise.all(
-      certificateSources.map(async (source) =>
-        withMedia(parseCertificate(await fetchText(source.textUrl)), {
+      certificateSources.map(async (source) => {
+        if (source.hardcoded) {
+          return withMedia(
+            {
+              ...source.hardcoded,
+              keyLearnings: [],
+              relevance: "",
+            },
+            {
+              slug: source.slug,
+              media: source.media,
+            }
+          );
+        }
+        return withMedia(parseCertificate(await fetchText(source.textUrl)), {
           slug: source.slug,
           media: source.media,
-        })
-      )
+        });
+      })
     ),
   ]);
 
   return {
     about: rewriteAbout(aboutText),
-    skills: parseSkills(skillsText),
+    // Skills come directly from resume — not from txt file
+    skills: resumeSkills,
     projects,
-    featuredProject: projects.find((project) => project.featured) || projects[0],
     internships,
     hackathons,
     certificates,
     profile: {
       name: "ANTONY GODWIN S",
-      role: "Full Stack Developer | Zoho Experience",
-      identity: "AWS Certified | Specialized in React, Node, and Spring Boot | Innovator of Claridux",
+      tagline: "Final-year CSE Student | Full Stack Developer",
+      objective:
+        "Final-year Computer Science and Engineering student with hands-on software development experience through internships, projects, and hackathons. Experienced in Java, JavaScript, React.js, Node.js, Express.js, Spring Boot, REST APIs, and MySQL.",
       image: profileAssets.profileImage,
       resumeUrl: profileAssets.resumePdf,
       email: "antonygodwin08@gmail.com",
+      phone: "+91 99949 82519",
+      location: "Tiruchirappalli, Tamil Nadu, India",
       links: externalLinks,
     },
   };

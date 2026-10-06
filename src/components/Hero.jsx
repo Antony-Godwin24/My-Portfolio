@@ -4,205 +4,371 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import TerminalRoundedIcon from "@mui/icons-material/TerminalRounded";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 
 const Hero = ({ profile }) => {
-  const jumpToProjects = () => {
-    window.history.replaceState(null, "", "#projects");
-    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
     <Box id="hero" component="section" sx={styles.section}>
-      <Box sx={styles.layout}>
+      {/* Dark background layer */}
+      <Box sx={styles.bg} />
+
+      <Box sx={styles.inner}>
+        {/* LEFT: Text content */}
         <Box sx={styles.copy}>
-          <Chip label="Full Stack Developer" sx={styles.kicker} />
+          {/* Zoho-style color dots row */}
+          <Stack direction="row" spacing={1} sx={{ mb: 3 }}>
+            {["#e84c2b", "#f5a623", "#00a86b", "#2563eb"].map((c) => (
+              <Box key={c} sx={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: c }} />
+            ))}
+          </Stack>
+
+          <Chip
+            label="Fresher · Open to Opportunities"
+            sx={styles.badge}
+          />
+
           <Typography variant="h1" sx={styles.name}>
-            {profile.name}
-          </Typography>
-          <Typography variant="h2" sx={styles.identity}>
-            {profile.identity}
-          </Typography>
-          <Typography sx={styles.description}>
-            I build practical software systems that connect product thinking, backend structure, and user-facing clarity.
+            ANTONY<br />GODWIN S
           </Typography>
 
-          <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={styles.actions}>
-            <Button variant="contained" onClick={jumpToProjects} sx={styles.primaryAction}>
-              View Projects
+          <Typography sx={styles.tagline}>
+            Final-year CSE Student &amp; Full Stack Developer
+          </Typography>
+
+          <Typography sx={styles.objective}>
+            {profile.objective}
+          </Typography>
+
+          {/* Contact Details Bar */}
+          <Box sx={styles.contactBar}>
+            <Box sx={styles.contactItem}>
+              <Box sx={{ ...styles.contactIconCircle, backgroundColor: "rgba(245,166,35,0.12)", color: "#f5a623" }}>
+                <LocationOnOutlinedIcon sx={{ fontSize: 16 }} />
+              </Box>
+              <Box>
+                <Typography sx={styles.contactLabel}>Location</Typography>
+                <Typography sx={styles.contactValue}>Tiruchirappalli, TN</Typography>
+              </Box>
+            </Box>
+            <Box sx={styles.contactDivider} />
+            <Box sx={styles.contactItem}>
+              <Box sx={{ ...styles.contactIconCircle, backgroundColor: "rgba(37,99,235,0.12)", color: "#3b82f6" }}>
+                <EmailOutlinedIcon sx={{ fontSize: 16 }} />
+              </Box>
+              <Box>
+                <Typography sx={styles.contactLabel}>Email</Typography>
+                <Typography sx={styles.contactValue}>antonygodwin08@gmail.com</Typography>
+              </Box>
+            </Box>
+          </Box>
+
+          {/* Actions */}
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ mt: 4 }}>
+            <Button
+              variant="contained"
+              onClick={() => scrollTo("projects")}
+              sx={styles.primaryBtn}
+            >
+              View My Work
             </Button>
-            <Button component="a" href={profile.resumeUrl} download="Antony_Godwin_Resume.pdf" variant="outlined" sx={styles.secondaryAction}>
+            <Button
+              component="a"
+              href={profile.resumeUrl}
+              download="ANTONY_GODWIN_S_RESUME.pdf"
+              variant="outlined"
+              sx={styles.outlineBtn}
+            >
               Download Resume
             </Button>
           </Stack>
 
-          <Stack direction="row" spacing={1.5} sx={styles.links}>
-            <IconButton component="a" href={profile.links.github} target="_blank" rel="noreferrer" sx={styles.iconButton} aria-label="GitHub">
-              <GitHubIcon />
+          {/* Social links */}
+          <Stack direction="row" spacing={1.5} sx={{ mt: 3.5 }}>
+            <IconButton component="a" href={profile.links.github} target="_blank" rel="noreferrer" sx={styles.socialBtn} aria-label="GitHub">
+              <GitHubIcon sx={{ fontSize: 18 }} />
             </IconButton>
-            <IconButton component="a" href={profile.links.linkedin} target="_blank" rel="noreferrer" sx={styles.iconButton} aria-label="LinkedIn">
-              <LinkedInIcon />
+            <IconButton component="a" href={profile.links.linkedin} target="_blank" rel="noreferrer" sx={styles.socialBtn} aria-label="LinkedIn">
+              <LinkedInIcon sx={{ fontSize: 18 }} />
             </IconButton>
-            <IconButton component="a" href={profile.links.leetcode} target="_blank" rel="noreferrer" sx={styles.iconButton} aria-label="LeetCode">
-              <TerminalRoundedIcon />
+            <IconButton component="a" href={profile.links.leetcode} target="_blank" rel="noreferrer" sx={styles.socialBtn} aria-label="LeetCode">
+              <TerminalRoundedIcon sx={{ fontSize: 18 }} />
             </IconButton>
-            <IconButton component="a" href={profile.links.email} sx={styles.iconButton} aria-label="Email">
-              <EmailOutlinedIcon />
+            <IconButton component="a" href={profile.links.email} sx={styles.socialBtn} aria-label="Email">
+              <EmailOutlinedIcon sx={{ fontSize: 18 }} />
             </IconButton>
           </Stack>
         </Box>
 
-        <Box sx={styles.visual}>
-          <Box sx={styles.visualFrame}>
-            <Avatar src={profile.image} alt={profile.name} sx={styles.avatar} />
-            <Box sx={styles.metricCard}>
-              <Typography sx={styles.metricLabel}>Focus</Typography>
-              <Typography sx={styles.metricValue}>Product systems</Typography>
-            </Box>
-            <Box sx={styles.metricCardAlt}>
-              <Typography sx={styles.metricLabel}>Approach</Typography>
-              <Typography sx={styles.metricValue}>Clarity first</Typography>
-            </Box>
+        {/* RIGHT: Profile photo */}
+        <Box sx={styles.photoWrapper}>
+          {/* Decorative background circle */}
+          <Box sx={styles.photoBg} />
+          <Avatar
+            src={profile.image}
+            alt="ANTONY GODWIN S"
+            sx={styles.photo}
+            imgProps={{ style: { objectPosition: "top center" } }}
+          />
+          {/* Floating stat cards */}
+          <Box sx={styles.statCard1}>
+            <Typography sx={styles.statNum}>3+</Typography>
+            <Typography sx={styles.statLabel}>Internships</Typography>
+          </Box>
+          <Box sx={styles.statCard2}>
+            <Typography sx={styles.statNum}>1st</Typography>
+            <Typography sx={styles.statLabel}>Prize × 2 Hackathons</Typography>
           </Box>
         </Box>
       </Box>
+
+      {/* Bottom fade to white */}
+      <Box sx={styles.fadeBottom} />
     </Box>
   );
 };
 
 const styles = {
   section: {
-    maxWidth: 1280,
-    margin: "0 auto",
-    padding: { xs: "2rem 1.25rem 4rem", md: "4rem 2rem 6rem" },
+    position: "relative",
+    backgroundColor: "#1a1a1a",
+    overflow: "hidden",
+    minHeight: { xs: "auto", md: "100vh" },
+    display: "flex",
+    flexDirection: "column",
   },
-  layout: {
-    minHeight: { md: "calc(100vh - 110px)" },
+  bg: {
+    position: "absolute",
+    inset: 0,
+    background:
+      "radial-gradient(ellipse at 20% 50%, rgba(232,76,43,0.12) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(37,99,235,0.1) 0%, transparent 50%)",
+    pointerEvents: "none",
+  },
+  inner: {
+    position: "relative",
+    zIndex: 1,
+    maxWidth: 1200,
+    width: "100%",
+    margin: "0 auto",
+    px: { xs: 2.5, md: 4 },
+    py: { xs: 5, md: 0 },
+    minHeight: { md: "100vh" },
     display: "grid",
-    gridTemplateColumns: { xs: "1fr", lg: "1.1fr 0.9fr" },
+    gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
     alignItems: "center",
-    gap: { xs: 5, md: 8 },
+    gap: { xs: 5, lg: 4 },
   },
   copy: {
-    maxWidth: 720,
+    color: "#ffffff",
+    maxWidth: 600,
   },
-  kicker: {
-    mb: 3,
-    backgroundColor: "#dbeafe",
-    color: "#1d4ed8",
+  badge: {
+    mb: 2.5,
+    backgroundColor: "rgba(232,76,43,0.15)",
+    color: "#ff8066",
+    border: "1px solid rgba(232,76,43,0.3)",
     fontWeight: 700,
+    fontSize: "0.8rem",
+    letterSpacing: "0.02em",
   },
   name: {
-    fontSize: { xs: "3rem", md: "5.6rem" },
-    lineHeight: 0.95,
-    color: "#0f172a",
-    maxWidth: 680,
+    fontSize: { xs: "3.2rem", sm: "4rem", md: "5.2rem" },
+    lineHeight: 0.92,
+    color: "#ffffff",
+    fontWeight: 900,
+    letterSpacing: "-0.03em",
   },
-  identity: {
-    mt: 3,
-    fontSize: { xs: "1.55rem", md: "2.4rem" },
-    lineHeight: 1.15,
-    color: "#334155",
-    maxWidth: 680,
+  tagline: {
+    mt: 2.5,
+    fontSize: { xs: "1.1rem", md: "1.3rem" },
+    color: "#aaaaaa",
+    fontWeight: 500,
   },
-  description: {
-    mt: 3,
-    maxWidth: 620,
-    color: "#475569",
-    fontSize: { xs: "1rem", md: "1.12rem" },
+  objective: {
+    mt: 2,
+    color: "#888888",
+    fontSize: { xs: "0.9rem", md: "0.97rem" },
+    lineHeight: 1.75,
+    maxWidth: 540,
   },
-  actions: {
-    mt: 4,
+  contactBar: {
+    mt: 3.5,
+    display: "flex",
+    flexWrap: { xs: "wrap", sm: "nowrap" },
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.04)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    borderRadius: "14px",
+    p: { xs: 1.5, sm: "10px 16px" },
+    gap: { xs: 1.5, sm: 2 },
+    maxWidth: 580,
   },
-  primaryAction: {
-    boxShadow: "0 18px 35px rgba(37, 99, 235, 0.22)",
+  contactItem: {
+    display: "flex",
+    alignItems: "center",
+    gap: 1.25,
+    flex: { xs: "1 1 100%", sm: "auto" },
+  },
+  contactIconCircle: {
+    width: 32,
+    height: 32,
+    borderRadius: "8px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  },
+  contactLabel: {
+    fontSize: "0.68rem",
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    color: "#777777",
+    fontWeight: 700,
+    lineHeight: 1.1,
+  },
+  contactValue: {
+    fontSize: "0.82rem",
+    color: "#e2e8f0",
+    fontWeight: 600,
+    lineHeight: 1.3,
+    mt: 0.2,
+  },
+  contactDivider: {
+    display: { xs: "none", sm: "block" },
+    width: "1px",
+    height: "28px",
+    backgroundColor: "rgba(255,255,255,0.08)",
+  },
+  primaryBtn: {
+    backgroundColor: "#e84c2b",
+    color: "#ffffff",
+    borderRadius: "8px",
+    px: 3,
+    py: 1.25,
+    fontWeight: 700,
+    fontSize: "0.95rem",
+    boxShadow: "0 4px 20px rgba(232,76,43,0.35)",
     "&:hover": {
-      transform: "translateY(-2px) scale(1.02)",
+      backgroundColor: "#c73d20",
+      transform: "translateY(-2px)",
+      boxShadow: "0 8px 24px rgba(232,76,43,0.4)",
     },
+    transition: "all 160ms ease",
   },
-  secondaryAction: {
-    borderColor: "#cbd5e1",
-    color: "#0f172a",
+  outlineBtn: {
+    borderColor: "rgba(255,255,255,0.25)",
+    color: "#ffffff",
+    borderRadius: "8px",
+    px: 3,
+    py: 1.25,
+    fontWeight: 600,
+    fontSize: "0.95rem",
     "&:hover": {
-      borderColor: "#2563eb",
-      backgroundColor: "#eff6ff",
-      transform: "translateY(-2px) scale(1.02)",
+      borderColor: "rgba(255,255,255,0.55)",
+      backgroundColor: "rgba(255,255,255,0.06)",
+      transform: "translateY(-2px)",
     },
+    transition: "all 160ms ease",
   },
-  links: {
-    mt: 3,
-  },
-  iconButton: {
-    color: "#334155",
-    border: "1px solid #cbd5e1",
-    backgroundColor: "#fff",
+  socialBtn: {
+    width: 38,
+    height: 38,
+    color: "#aaaaaa",
+    border: "1px solid rgba(255,255,255,0.12)",
+    borderRadius: "8px",
     "&:hover": {
-      color: "#2563eb",
-      backgroundColor: "#eff6ff",
-      transform: "translateY(-2px) scale(1.02)",
+      color: "#ffffff",
+      backgroundColor: "rgba(255,255,255,0.08)",
+      borderColor: "rgba(255,255,255,0.25)",
+      transform: "translateY(-2px)",
     },
+    transition: "all 160ms ease",
   },
-  visual: {
+  photoWrapper: {
+    position: "relative",
     display: "flex",
     justifyContent: "center",
+    alignItems: "flex-end",
+    height: { xs: 380, md: "70vh" },
+    maxHeight: 650,
+    mt: { xs: 0, lg: 4 },
   },
-  visualFrame: {
+  photoBg: {
+    position: "absolute",
+    bottom: 0,
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: "85%",
+    height: "90%",
+    borderRadius: "50% 50% 0 0",
+    background: "linear-gradient(180deg, rgba(232,76,43,0.15) 0%, rgba(37,99,235,0.08) 100%)",
+    border: "1px solid rgba(255,255,255,0.06)",
+  },
+  photo: {
     position: "relative",
-    width: "100%",
-    maxWidth: 460,
-    minHeight: 610,
-    padding: "20px",
-    borderRadius: "38px",
-    backgroundColor: "#e2e8f0",
-    border: "1px solid rgba(148, 163, 184, 0.35)",
-    overflow: "clip",
-  },
-  avatar: {
-    width: "100%",
-    height: 455,
-    borderRadius: "30px",
-    border: "10px solid #fff",
-    boxShadow: "0 30px 60px rgba(15, 23, 42, 0.14)",
+    zIndex: 1,
+    width: { xs: 260, sm: 320, md: 380, lg: 420 },
+    height: { xs: 340, sm: 400, md: 480, lg: 560 },
+    borderRadius: "0",
     objectFit: "cover",
-  },
-  metricCard: {
-    position: "absolute",
-    left: 24,
-    bottom: 24,
-    padding: "1rem 1.15rem",
-    borderRadius: "20px",
-    backgroundColor: "#0f172a",
-    color: "#fff",
-    width: 190,
-    transition: "transform 180ms ease",
-    "&:hover": {
-      transform: "scale(1.02)",
+    objectPosition: "top center",
+    filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.4))",
+    // Make it look like person standing
+    "& img": {
+      objectFit: "cover",
+      objectPosition: "top center",
     },
   },
-  metricCardAlt: {
+  statCard1: {
     position: "absolute",
-    right: 24,
-    bottom: 24,
-    padding: "1rem 1.15rem",
-    borderRadius: "20px",
+    left: { xs: 0, md: -10 },
+    bottom: { xs: 30, md: 80 },
     backgroundColor: "#ffffff",
-    color: "#0f172a",
-    border: "1px solid #cbd5e1",
-    width: 190,
-    transition: "transform 180ms ease",
-    zIndex: 3,
-    "&:hover": {
-      transform: "scale(1.02)",
-    },
+    borderRadius: "12px",
+    px: 2,
+    py: 1.5,
+    boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
+    textAlign: "center",
+    minWidth: 90,
+    zIndex: 2,
   },
-  metricLabel: {
-    fontSize: "0.8rem",
-    color: "inherit",
-    opacity: 0.72,
+  statCard2: {
+    position: "absolute",
+    right: { xs: 0, md: -10 },
+    bottom: { xs: 30, md: 80 },
+    backgroundColor: "#1a1a1a",
+    border: "1px solid rgba(255,255,255,0.12)",
+    borderRadius: "12px",
+    px: 2,
+    py: 1.5,
+    boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
+    textAlign: "center",
+    minWidth: 110,
+    zIndex: 2,
   },
-  metricValue: {
-    mt: 0.5,
-    fontSize: "1.05rem",
-    fontWeight: 700,
+  statNum: {
+    fontSize: "1.5rem",
+    fontWeight: 900,
+    color: "#e84c2b",
+    lineHeight: 1,
+  },
+  statLabel: {
+    fontSize: "0.72rem",
+    color: "#888888",
+    fontWeight: 600,
+    mt: 0.4,
+  },
+  fadeBottom: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 80,
+    background: "linear-gradient(to bottom, transparent, #1a1a1a)",
+    pointerEvents: "none",
   },
 };
 

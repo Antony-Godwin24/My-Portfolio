@@ -1,55 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { AppBar, Box, Button, Drawer, IconButton, Link, Stack, Toolbar, Typography } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 const sections = [
-  { id: "about", label: "About" },
+  { id: "hero", label: "Home" },
   { id: "education", label: "Education" },
-  { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" },
   { id: "skills", label: "Skills" },
-  { id: "contact", label: "Contact" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "certificates", label: "Certificates" },
 ];
 
 const Navbar = ({ resumeUrl }) => {
   const [elevated, setElevated] = useState(false);
   const [open, setOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("about");
+  const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
-    const onScroll = () => setElevated(window.scrollY > 18);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => setElevated(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    const updateActiveSection = () => {
-      const offset = 140;
-      const scrollPosition = window.scrollY + offset;
+    const updateActive = () => {
+      const offset = 120;
+      const pos = window.scrollY + offset;
       let current = sections[0].id;
-
-      sections.forEach((section) => {
-        const element = document.getElementById(section.id);
-        if (element && scrollPosition >= element.offsetTop) {
-          current = section.id;
-        }
+      sections.forEach((s) => {
+        const el = document.getElementById(s.id);
+        if (el && pos >= el.offsetTop) current = s.id;
       });
-
       setActiveSection(current);
     };
-
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection);
-    window.addEventListener("resize", updateActiveSection);
-
+    updateActive();
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive, { passive: true });
     return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
+      window.removeEventListener("scroll", updateActive);
+      window.removeEventListener("resize", updateActive);
     };
   }, []);
 
-  const goToSection = (event, id) => {
-    event.preventDefault();
+  const goTo = (e, id) => {
+    e.preventDefault();
     setActiveSection(id);
     window.history.replaceState(null, "", `#${id}`);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -57,50 +52,75 @@ const Navbar = ({ resumeUrl }) => {
   };
 
   const navLinks = (
-    <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 1, md: 0.5 }} alignItems={{ xs: "flex-start", md: "center" }}>
-      {sections.map((section) => (
+    <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 0.5, md: 0 }} alignItems={{ xs: "flex-start", md: "center" }}>
+      {sections.map((s) => (
         <Link
-          key={section.id}
-          href={`#${section.id}`}
-          onClick={(event) => goToSection(event, section.id)}
+          key={s.id}
+          href={`#${s.id}`}
+          onClick={(e) => goTo(e, s.id)}
           sx={{
             ...styles.link,
-            ...(activeSection === section.id ? styles.activeLink : {}),
+            ...(activeSection === s.id ? styles.activeLink : {}),
           }}
         >
-          {section.label}
+          {s.label}
         </Link>
       ))}
     </Stack>
   );
 
   return (
-    <AppBar position="sticky" elevation={0} sx={{ ...styles.appBar, ...(elevated ? styles.appBarRaised : {}) }}>
+    <AppBar position="sticky" elevation={0} sx={{ ...styles.appBar, ...(elevated ? styles.appBarElevated : {}) }}>
       <Toolbar sx={styles.toolbar}>
-        <Link href="#hero" onClick={(event) => goToSection(event, "hero")} sx={styles.brand}>
-          <Typography component="span" sx={styles.brandMark}>AG</Typography>
-          <Typography component="span" sx={styles.brandText}>Portfolio</Typography>
+        {/* Brand */}
+        <Link href="#hero" onClick={(e) => goTo(e, "hero")} sx={styles.brand}>
+          <Box sx={styles.brandMark}>
+            <Typography sx={styles.brandInitials}>AG</Typography>
+          </Box>
+          <Box>
+            <Typography sx={styles.brandName}>Antony Godwin S</Typography>
+            <Typography sx={styles.brandSub}>Software Developer</Typography>
+          </Box>
         </Link>
 
-        <Box sx={styles.desktopNav}>
-          {navLinks}
-        </Box>
+        {/* Desktop nav */}
+        <Box sx={{ display: { xs: "none", md: "block" } }}>{navLinks}</Box>
 
+        {/* Actions */}
         <Stack direction="row" spacing={1.5} alignItems="center">
-          <Button component="a" href={resumeUrl} download="Antony_Godwin_Resume.pdf" variant="contained" sx={styles.resumeButton}>
+          <Button
+            component="a"
+            href={resumeUrl}
+            download="ANTONY_GODWIN_S_RESUME.pdf"
+            variant="contained"
+            sx={styles.resumeBtn}
+          >
             Download Resume
           </Button>
-          <IconButton onClick={() => setOpen(true)} sx={styles.menuButton} aria-label="Open navigation">
+          <IconButton onClick={() => setOpen(true)} sx={styles.menuBtn} aria-label="Open menu">
             <MenuRoundedIcon />
           </IconButton>
         </Stack>
       </Toolbar>
 
+      {/* Mobile drawer */}
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)} PaperProps={{ sx: styles.drawer }}>
         <Box sx={styles.drawerInner}>
-          <Typography sx={styles.drawerTitle}>Navigate</Typography>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
+            <Typography sx={{ fontWeight: 800, fontSize: "1.1rem", color: "#1a1a1a" }}>Menu</Typography>
+            <IconButton onClick={() => setOpen(false)} size="small">
+              <CloseRoundedIcon />
+            </IconButton>
+          </Box>
           {navLinks}
-          <Button component="a" href={resumeUrl} download="Antony_Godwin_Resume.pdf" variant="contained" sx={styles.drawerButton}>
+          <Button
+            component="a"
+            href={resumeUrl}
+            download="ANTONY_GODWIN_S_RESUME.pdf"
+            variant="contained"
+            fullWidth
+            sx={{ mt: 3, borderRadius: 2 }}
+          >
             Download Resume
           </Button>
         </Box>
@@ -111,104 +131,112 @@ const Navbar = ({ resumeUrl }) => {
 
 const styles = {
   appBar: {
-    backgroundColor: "rgba(248, 250, 252, 0.8)",
-    backdropFilter: "blur(12px)",
+    backgroundColor: "rgba(255,255,255,0.95)",
+    backdropFilter: "blur(16px)",
     borderBottom: "1px solid transparent",
-    transition: "background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease",
+    transition: "border-color 200ms ease, box-shadow 200ms ease",
+    color: "#1a1a1a",
   },
-  appBarRaised: {
-    borderColor: "rgba(148, 163, 184, 0.2)",
-    boxShadow: "0 14px 40px rgba(15, 23, 42, 0.06)",
+  appBarElevated: {
+    borderColor: "#e8e8e8",
+    boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
   },
   toolbar: {
-    maxWidth: 1280,
+    maxWidth: 1200,
     width: "100%",
     margin: "0 auto",
-    minHeight: 86,
+    minHeight: 72,
     px: { xs: 2, md: 3 },
     display: "flex",
     justifyContent: "space-between",
+    gap: 2,
   },
   brand: {
     display: "inline-flex",
     alignItems: "center",
     gap: 1.25,
     textDecoration: "none",
+    flexShrink: 0,
   },
   brandMark: {
-    width: 42,
-    height: 42,
-    borderRadius: "14px",
-    display: "grid",
-    placeItems: "center",
-    backgroundColor: "#0f172a",
-    color: "#fff",
+    width: 38,
+    height: 38,
+    borderRadius: "10px",
+    background: "linear-gradient(135deg, #1a1a1a 0%, #333333 100%)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
+  },
+  brandInitials: {
+    color: "#ffffff",
+    fontWeight: 900,
+    fontSize: "0.95rem",
+    letterSpacing: "-0.02em",
+  },
+  brandName: {
+    color: "#1a1a1a",
     fontWeight: 800,
-    letterSpacing: "-0.05em",
+    fontSize: "0.95rem",
+    lineHeight: 1.15,
+    letterSpacing: "-0.01em",
   },
-  brandText: {
-    color: "#0f172a",
-    fontWeight: 700,
-    fontSize: "0.98rem",
-  },
-  desktopNav: {
-    display: { xs: "none", md: "block" },
+  brandSub: {
+    color: "#777777",
+    fontWeight: 500,
+    fontSize: "0.72rem",
+    letterSpacing: "0.02em",
   },
   link: {
     px: 1.5,
-    py: 1,
-    color: "#475569",
-    fontSize: "0.95rem",
-    borderRadius: 999,
+    py: 0.9,
+    color: "#555555",
+    fontSize: "0.9rem",
+    fontWeight: 500,
+    borderRadius: "6px",
     textDecoration: "none",
-    transition: "transform 180ms ease, color 180ms ease, background-color 180ms ease",
-    "&:before, &:after": {
-      display: "none",
-    },
+    transition: "color 150ms ease, background-color 150ms ease",
+    "&:before, &:after": { display: "none" },
     "&:hover": {
-      color: "#0f172a",
-      backgroundColor: "#e2e8f0",
-      transform: "translateY(-1px)",
+      color: "#1a1a1a",
+      backgroundColor: "#f0f0f0",
       textDecoration: "none",
     },
   },
   activeLink: {
-    backgroundColor: "#dbeafe",
-    color: "#1d4ed8",
+    color: "#e84c2b",
+    backgroundColor: "rgba(232, 76, 43, 0.06)",
     fontWeight: 700,
   },
-  resumeButton: {
+  resumeBtn: {
     display: { xs: "none", sm: "inline-flex" },
+    backgroundColor: "#e84c2b",
+    color: "#fff",
+    fontSize: "0.85rem",
+    borderRadius: "6px",
+    py: 1,
+    px: 2.5,
     boxShadow: "none",
     "&:hover": {
-      boxShadow: "0 16px 32px rgba(37, 99, 235, 0.18)",
-      transform: "translateY(-1px)",
+      backgroundColor: "#c73d20",
+      boxShadow: "0 4px 12px rgba(232,76,43,0.3)",
     },
   },
-  menuButton: {
+  menuBtn: {
     display: { xs: "inline-flex", md: "none" },
-    color: "#0f172a",
-    border: "1px solid #cbd5e1",
+    color: "#1a1a1a",
+    border: "1px solid #e8e8e8",
+    borderRadius: "8px",
   },
   drawer: {
-    width: 300,
-    p: 2,
+    width: 280,
     backgroundColor: "#ffffff",
   },
   drawerInner: {
-    display: "grid",
-    gap: 1,
-    paddingTop: 4,
-  },
-  drawerTitle: {
-    color: "#0f172a",
-    fontWeight: 800,
-    fontSize: "1.1rem",
-    mb: 1,
-  },
-  drawerButton: {
-    mt: 2,
-    justifySelf: "start",
+    p: 3,
+    display: "flex",
+    flexDirection: "column",
+    gap: 0.5,
   },
 };
 

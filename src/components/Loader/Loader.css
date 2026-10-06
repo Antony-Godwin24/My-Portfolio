@@ -1,0 +1,29 @@
+/* Loader: full-screen, centered gif only, no text */
+.loader-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.loader-fullscreen.loader-visible {
+  opacity: 1;
+}
+
+.loader-gif {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .loader-gif {
+    width: 150px;
+    height: 150px;
+  }
+}
